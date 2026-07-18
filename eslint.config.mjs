@@ -37,6 +37,10 @@ export default [
               sourceTag: 'scope:strings',
               onlyDependOnLibsWithTags: ['scope:shared', 'scope:strings'],
             },
+            {
+              sourceTag: 'scope:nitro',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:nitro'],
+            },
           ],
         },
       ],

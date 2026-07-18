@@ -1,14 +1,20 @@
-# Nx TypeScript Repository
+# ZhyJen Code — Open Source Monorepo
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-✨ A repository showcasing key [Nx](https://nx.dev) features for TypeScript monorepos ✨
-🚀 If you haven't connected to Nx Cloud yet, [complete your setup here](https://cloud.nx.app/get-started). Get faster builds with remote caching, distributed task execution, and self-healing CI. [See how your workspace can benefit](#nx-cloud).
+🧬 **Zygen** — open source projects built on this [Nx](https://nx.dev) monorepo. 🚀 If you haven't connected to Nx Cloud yet, [complete your setup here](https://cloud.nx.app/get-started). Get faster builds with remote caching, distributed task execution, and self-healing CI. [See how your workspace can benefit](#nx-cloud).
+
+## 🌍 About
+
+This repository is the home for **Zygen** — a collection of unique open source projects developed from within this Nx monorepo. We explore and build on interesting engines and frameworks, starting with the **Nitro engine** (the server engine behind [Nuxt](https://nuxt.com)).
+
+ZhyJen Code is part of the broader [ZhyJen CodeLab](https://github.com/ZhyJenae) ecosystem — a youth coding pathway that helps young people learn programming and build with purpose. This repo is where the open source work lives; the projects here are meant to be unique, useful, and freely shared.
+
 ## 📦 Project Overview
 
-This repository demonstrates a production-ready TypeScript monorepo with:
+This monorepo currently demonstrates a production-ready TypeScript workspace with:
 
-- **3 Publishable Packages** - Ready for NPM publishing
+- **3 Publishable Packages**
 
   - `@org/strings` - String manipulation utilities
   - `@org/async` - Async utility functions with retry logic
@@ -17,12 +23,14 @@ This repository demonstrates a production-ready TypeScript monorepo with:
 - **1 Internal Library**
   - `@org/utils` - Shared utilities (private, not published)
 
+> 🧪 **First exploration area:** the **Nitro engine** from Nuxt — building open source tooling, apps, or packages on top of Nitro's server runtime. See the roadmap below for where this is headed.
+
 ## 🚀 Quick Start
 
 ```bash
 # Clone the repository
 git clone <your-fork-url>
-cd typescript-template
+cd zhyjen-code
 
 # Install dependencies
 npm install
@@ -111,6 +119,14 @@ npx nx release publish --projects=@org/strings,@org/colors
 
 [Learn more about Nx Release →](https://nx.dev/docs/features/manage-releases)
 
+## 🗺️ Roadmap
+
+We're charting the open source direction for Zygen as a shared map (wayfinder). Early focus:
+
+- **Nitro engine exploration** — what to build on Nitro, and how it fits this monorepo
+- **Project structure** — where new unique packages/apps live alongside the existing utilities
+- **Publishing & contribution model** — how external contributors engage
+
 ## 📁 Project Structure
 
 ```
@@ -194,13 +210,14 @@ Nx Console is an editor extension that enriches your developer experience. It le
 - [Module Boundaries](https://nx.dev/docs/features/enforce-module-boundaries)
 - [Releasing Packages](https://nx.dev/docs/features/manage-releases)
 - [Nx Cloud](https://nx.dev/nx-cloud)
+- [Nitro (Nuxt server engine)](https://nitro.build)
+- [Nuxt](https://nuxt.com)
 
 ## 💬 Community
 
-Join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [X (Twitter)](https://twitter.com/nxdevtools)
-- [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [YouTube](https://www.youtube.com/@nxdevtools)
-- [Blog](https://nx.dev/blog)
+- [ZhyJen CodeLab on GitHub](https://github.com/ZhyJenae)
+- [Nx Discord](https://go.nx.dev/community)
+- [Nx on X (Twitter)](https://twitter.com/nxdevtools)
+- [Nx on LinkedIn](https://www.linkedin.com/company/nrwl)
+- [Nx on YouTube](https://www.youtube.com/@nxdevtools)
+- [Nx Blog](https://nx.dev/blog)
