@@ -55,13 +55,15 @@
     }
   ],
   "release": {
-    "projects": [
-      "!utils",
-      "!@org/source",
-      "@zygen/nitro"
-    ],
+    "projects": ["zygen-nitro"],
+    "releaseTag": {
+      "pattern": "v{version}"
+    },
     "version": {
       "preVersionCommand": "npx nx run-many -t build"
+    },
+    "changelog": {
+      "workspaceChangelog": false
     }
   },
   "targetDefaults": {

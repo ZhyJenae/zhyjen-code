@@ -1,0 +1,29 @@
+version: 2.1
+
+jobs:
+  publish:
+    docker:
+      - image: cimg/node:22.14
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - run:
+          name: Build packages
+          command: npx nx run-many -t build
+      - run:
+          name: Publish to npm with OIDC (trusted publishing)
+          command: |
+            export NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
+            npx nx release publish
+
+workflows:
+  publish:
+    jobs:
+      - publish:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

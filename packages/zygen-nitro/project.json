@@ -1,0 +1,10 @@
+{
+  "name": "zygen-nitro",
+  "targets": {
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "."
+      }
+    }
+  }
+}
