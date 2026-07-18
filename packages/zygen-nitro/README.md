@@ -11,8 +11,10 @@ A small, education-themed **Nitro plugin** from [Zygen](https://github.com/ZhyJe
 ```bash
 npm install @zygen/nitro
 # peer dependency
-npm install nitropack
+npm install nitro
 ```
+
+> Built for **Nitro v3** — uses `defineNitroPlugin` from `nitro/runtime`.
 
 ## Usage
 

@@ -1,29 +1,21 @@
-import type { H3Event } from 'h3';
 import type { ZygenInsightOptions, InsightState } from './options.js';
 import { createRecorder } from './insight.js';
+import { defineNitroPlugin, useNitroApp } from 'nitro/runtime';
+import type { NitroApp } from 'nitro/types';
+
+export { useNitroApp };
 
 /**
- * Minimal local type for the Nitro runtime surface we use.
+ * Minimal view of the Nitro v3 request event we read.
  *
- * nitropack@2.13.4 ships `.d.ts` re-exports without file extensions, which
- * breaks type resolution under `moduleResolution: nodenext`. We declare the
- * small slice we depend on so the package builds cleanly and stays decoupled
- * from that packaging bug. Consumers get full types from nitropack directly.
+ * `HTTPEvent` exposes `path`/`method` getters at runtime, but h3 v3's
+ * published types omit them. We declare the slice we use so the package
+ * type-checks cleanly against the real runtime shape.
  */
-export interface NitroApp {
-  hooks: {
-    hook(name: 'request', fn: (event: H3Event) => void | Promise<void>): void;
-    hook(
-      name: 'response',
-      fn: (res: Response, event: H3Event) => void | Promise<void>
-    ): void;
-  };
+export interface ZygenEvent {
+  path: string;
+  method: string;
 }
-
-// nitropack/runtime exports defineNitroPlugin; import the value, tolerate the
-// upstream type-resolution quirk under nodenext.
-// @ts-expect-error - nitropack subpath types are broken under nodenext
-import { defineNitroPlugin } from 'nitropack/runtime';
 
 /**
  * Shared insight state, populated by the plugin's request/response hooks.
@@ -40,17 +32,21 @@ export const insightState: InsightState = {
  * (method, path, status, duration) so young creators can *see* how
  * the server behaves. v1 is telemetry-only; the visible debug route
  * is deferred to a v2 module/preset.
+ *
+ * Built for Nitro v3 — uses `defineNitroPlugin` from `nitro/runtime`.
  */
 export function defineZygenPlugin(options: ZygenInsightOptions = {}) {
   return defineNitroPlugin((nitroApp: NitroApp) => {
     const recorder = createRecorder(insightState, options);
 
-    nitroApp.hooks.hook('request', (event: H3Event) => {
-      recorder.start(event.path);
+    nitroApp.hooks.hook('request', (event) => {
+      const e = event as unknown as ZygenEvent;
+      recorder.start(e.path);
     });
 
-    nitroApp.hooks.hook('response', (res: Response, event: H3Event) => {
-      const record = recorder.finish(event.path, event.method, res.status);
+    nitroApp.hooks.hook('response', (res, event) => {
+      const e = event as unknown as ZygenEvent;
+      const record = recorder.finish(e.path, e.method, res.status);
       if (options.logToConsole) {
         // eslint-disable-next-line no-console
         console.log(`[zygen] ${record.method} ${record.path} -> ${record.status} (${record.durationMs}ms)`);
